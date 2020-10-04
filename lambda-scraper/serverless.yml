@@ -1,0 +1,19 @@
+service: lambda-scraper
+app: demo-scraper
+org: tifmoe
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: eu-west-2
+  timeout: 900
+
+functions:
+  scrape:
+    handler: handler.scrape
+    layers:
+      - ${cf:dependencies-layer-dev.SeleniumLayerExport}
+      - ${cf:dependencies-layer-dev.ChromedriverLayerExport}
+      - ${cf:dependencies-layer-dev.HeadlesschromeLayerExport}
